@@ -1,5 +1,3 @@
 CREATE TABLE IF NOT EXISTS customer (
-    email VARCHAR(100) PRIMARY KEY,
-    token1 VARCHAR(225),
-    token2 VARCHAR(225)
+    email VARCHAR(100) PRIMARY KEY
 );

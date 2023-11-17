@@ -1,6 +1,4 @@
 databaseChangeLog:
-#  - include:
-#      file: classpath:/db/changelog/changes/000-drop-database.sql
   - include:
       file: classpath:/db/changelog/changes/001-customer-table.sql
   - include:
