@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS package (
-    id int PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     status VARCHAR(225),
     weight DOUBLE NOT NULL,
     price DOUBLE NOT NULL,
