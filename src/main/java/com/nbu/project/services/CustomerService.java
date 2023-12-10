@@ -12,12 +12,16 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public List<Customer> getAllCustomers() {
-        // Implement logic to retrieve all customers from the database
         return customerRepository.findAll();
     }
 
     public Customer createCustomer(Customer customer) {
-        // Implement logic to save the customer to the database
         return customerRepository.save(customer);
+    }
+    public void update(Customer customer){
+        customerRepository.update(customer);
+    }
+    public void deleteByEmail(String email){
+        customerRepository.deleteByEmail(email);
     }
 }

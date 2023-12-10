@@ -1,5 +1,6 @@
 package com.nbu.project.dao;
 
+import com.nbu.project.entities.Customer;
 import com.nbu.project.entities.Employee;
 import org.springframework.stereotype.Repository;
 
@@ -76,22 +77,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getAllEmployees() {
-        return null;
-    }
-
-    @Override
-    public void saveEmployee(Employee employee) {
-
-    }
-
-    @Override
-    public void updateEmployee(Employee employee) {
-
-    }
-
-    @Override
-    public void deleteEmployee(String username) {
-
+        String query = "select email from Employee";
+        List<Employee> empList = new ArrayList<Employee>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Employee emp = new Employee(
+                        rs.getString("email"),
+                        rs.getString("name"),
+                        rs.getString("type"),
+                        rs.getInt("office_address_id"));
+                empList.add(emp);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return empList;
     }
 
     @Override

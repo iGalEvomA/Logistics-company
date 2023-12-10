@@ -1,6 +1,7 @@
 package com.nbu.project.repos;
 
 import com.nbu.project.entities.Address;
+import com.nbu.project.entities.Employee;
 import com.nbu.project.rowmapper.AddressRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +26,10 @@ public class AddressRepository {
         jdbcTemplate.update(sql, address.id(), address.address_type(), address.address());
         return address;
     }
-
+    public void update(int id, Address address) {
+        String query = "UPDATE address SET address_type = ?, address = ? WHERE id = ?";
+        jdbcTemplate.update(query, address.address_type(), address.address(), id);
+    }
     public void deleteById(int id) {
         String sql = "DELETE FROM address WHERE id = ?";
         jdbcTemplate.update(sql, id);

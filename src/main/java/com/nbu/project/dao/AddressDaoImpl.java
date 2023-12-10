@@ -47,7 +47,23 @@ public class AddressDaoImpl implements AddressDao{
 
     @Override
     public void update(Address address) {
+        String query = "UPDATE Address SET id=?, address_type=?, address=? WHERE id=?";
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
 
+            ps.setInt(1, address.id());
+            ps.setString(2, address.address_type());
+            ps.setString(3, address.address());
+
+            int out = ps.executeUpdate();
+            if (out != 0) {
+                System.out.println("Address updated with id=" + address.id());
+            } else {
+                System.out.println("No Address found with id=" + address.id());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

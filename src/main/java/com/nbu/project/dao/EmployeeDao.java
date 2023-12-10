@@ -11,13 +11,6 @@ public interface EmployeeDao {
     public Optional<Employee> getByEmail(String email);
     public List<Employee> getAllEmployees();
 
-    public void saveEmployee(Employee employee);
-
-    public void updateEmployee(Employee employee);
-
-    public void deleteEmployee(String email);
-
-
     void update(Employee employee);
 
     void deleteByEmail(String email);

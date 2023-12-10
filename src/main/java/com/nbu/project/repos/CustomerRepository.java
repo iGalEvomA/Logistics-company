@@ -1,6 +1,7 @@
 package com.nbu.project.repos;
 
 import com.nbu.project.entities.Customer;
+import com.nbu.project.entities.Employee;
 import com.nbu.project.rowmapper.CustomerRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,5 +31,13 @@ public class CustomerRepository {
         String sql = "SELECT COUNT(*) FROM customer WHERE email = ?";
         int count = jdbcTemplate.queryForObject(sql, Integer.class, email);
         return count > 0;
+    }
+    public void update(Customer customer) {
+        String query = "UPDATE customer SET email WHERE email = ?";
+        jdbcTemplate.update(query, customer.email());
+    }
+    public void deleteByEmail(String email) {
+        String query = "DELETE FROM customer WHERE email = ?";
+        jdbcTemplate.update(query, email);
     }
 }

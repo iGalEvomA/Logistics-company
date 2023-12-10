@@ -1,6 +1,7 @@
 package com.nbu.project.dao;
 
 import com.nbu.project.entities.Customer;
+import com.nbu.project.entities.Employee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 public class CustomerDaoImpl implements CustomerDao {
@@ -45,75 +47,53 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer getByEmail(String email) {
-        return null;
+        String query = "SELECT * FROM Customer WHERE email = ?";
+        Customer emp = null;
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    emp = new Customer(
+                            email
+                    );
+
+                    System.out.println("Customer Found::" + emp);
+                } else {
+                    System.out.println("No Customer found with username=" + email);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emp;
     }
 
     @Override
     public void update(Customer customer) {
-
+        String query = "update Customer where email=?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        try{
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, customer.email());
+            int out = ps.executeUpdate();
+            if(out !=0){
+                System.out.println("Customer updated with username="+customer.email());
+            }else System.out.println("No Customer found with username="+customer.email());
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            try {
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
-//    @Override
-//    public Customer getByEmail(String username) {
-//        String query = "select token1, token2 from Customer where email = ?";
-//        Customer emp = null;
-//        Connection con = null;
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        try{
-//            con = dataSource.getConnection();
-//            ps = con.prepareStatement(query);
-//            ps.setString(1, username);
-//            rs = ps.executeQuery();
-//            if(rs.next()){
-//                emp = new Customer();
-//                emp.setEmail(username);
-//                emp.setToken1(rs.getString("token1"));
-//                emp.setToken2(rs.getString("token2"));
-//                System.out.println("Customer Found::"+emp);
-//            }else{
-//                System.out.println("No Customer found with email="+username);
-//            }
-//        }catch(SQLException e){
-//            e.printStackTrace();
-//        }finally{
-//            try {
-//                rs.close();
-//                ps.close();
-//                con.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return emp;
-//    }
-
-//    @Override
-//    public void update(Customer customer) {
-//        String query = "update Customer set token1=?, token2=? where email=?";
-//        Connection con = null;
-//        PreparedStatement ps = null;
-//        try{
-//            con = dataSource.getConnection();
-//            ps = con.prepareStatement(query);
-//            ps.setString(1, customer.getToken1());
-//            ps.setString(2, customer.getToken2());
-//            ps.setString(3, customer.getEmail());
-//            int out = ps.executeUpdate();
-//            if(out !=0){
-//                System.out.println("Customer updated with username="+customer.getEmail());
-//            }else System.out.println("No Customer found with username="+customer.getEmail());
-//        }catch(SQLException e){
-//            e.printStackTrace();
-//        }finally{
-//            try {
-//                ps.close();
-//                con.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     @Override
     public void deleteByEmail(String email) {

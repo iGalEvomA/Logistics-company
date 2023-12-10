@@ -2,6 +2,7 @@ package com.nbu.project.controllers;
 
 import com.nbu.project.entities.Address;
 import com.nbu.project.entities.Customer;
+import com.nbu.project.entities.Employee;
 import com.nbu.project.services.AddressService;
 import com.nbu.project.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,9 @@ public class AddressController {
     public void deleteById(@PathVariable int id){
         addressService.deleteAddressById(id);
     }
+    @PutMapping("/{id}")
+    public void updateAddress(@PathVariable int id, @RequestBody Address address) {
+        addressService.update(id, address);
+    }
+
 }

@@ -17,7 +17,6 @@ public class EmployeeService {
 
 
     public Employee createEmployee(Employee employee) {
-        // Add any business logic or validation before saving
         return employeeRepository.save(employee);
     }
 
@@ -29,15 +28,12 @@ public class EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.getByEmail(email);
         return optionalEmployee.orElse(null);
     }
-
-    public Employee updateEmployee(String email, Employee employee) {
-        return employee;
+    public void updateEmployee(String email, Employee employee) {
+        employeeRepository.update(email, employee);
     }
 
     public void deleteEmployee(String email) {
+        employeeRepository.deleteByEmail(email);
     }
-
-    // Add other service methods (update, delete, etc.) as needed
-
 }
 

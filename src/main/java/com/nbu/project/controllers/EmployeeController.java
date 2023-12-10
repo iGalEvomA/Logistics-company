@@ -20,29 +20,26 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
-    // Mock endpoint for creating a new employee
+    @GetMapping
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
+    @GetMapping("/{email}")
+    public Employee getByEmail(@PathVariable String email) {
+        return employeeService.getByEmail(email);
+    }
+    @PutMapping("/{email}")
+    public void updateEmployee(@PathVariable String email, @RequestBody Employee employee) {
+        employeeService.updateEmployee(email, employee);
+    }
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
     }
-
-    // Mock endpoint for updating an existing employee
-    @PutMapping("/{email}")
-    public Employee updateEmployee(@PathVariable String email, @RequestBody Employee employee) {
-        return employeeService.updateEmployee(email, employee);
-    }
-
-    // Mock endpoint for deleting an employee by username
     @DeleteMapping("/{email}")
     public void deleteEmployee(@PathVariable String email) {
         employeeService.deleteEmployee(email);
     }
 
-    // Mock endpoint for retrieving all employees
-    @GetMapping
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
-    }
 }
 

@@ -14,15 +14,16 @@ public class AddressService {
     private AddressRepository addressRepository;
 
     public List<Address> getAllAddresses() {
-        // Implement logic to retrieve all customers from the database
         return addressRepository.findAll();
     }
 
     public Address createAddress(Address address) {
-        // Implement logic to save the customer to the database
         return addressRepository.save(address);
     }
     public void deleteAddressById(int id) {
         addressRepository.deleteById(id);
+    }
+    public void update(int id, Address address){
+        addressRepository.update(id, address);
     }
 }

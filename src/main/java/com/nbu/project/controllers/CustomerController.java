@@ -1,6 +1,7 @@
 package com.nbu.project.controllers;
 
 import com.nbu.project.entities.Customer;
+import com.nbu.project.entities.Employee;
 import com.nbu.project.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,15 @@ public class CustomerController {
     @GetMapping
     public List<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
+    }
+
+    @PutMapping("/{email}")
+    public void updateCustomer(@PathVariable String email, @RequestBody Customer customer) {
+        customerService.update(customer);
+    }
+    @DeleteMapping("/{email}")
+    public void deleteCustomer(@PathVariable String email) {
+        customerService.deleteByEmail(email);
     }
 
 }

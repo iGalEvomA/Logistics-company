@@ -26,6 +26,11 @@ public class EmployeeRepository {
         return employee;
     }
 
+    public List<Employee> getAll() {
+        String query = "SELECT * FROM employee";
+        return jdbcTemplate.query(query, new EmployeeRowMapper());
+    }
+
     public Optional<Employee> getByEmail(String email) {
         String query = "SELECT * FROM employee WHERE email = ?";
         try {
@@ -36,14 +41,9 @@ public class EmployeeRepository {
         }
     }
 
-    public List<Employee> getAll() {
-        String query = "SELECT * FROM employee";
-        return jdbcTemplate.query(query, new EmployeeRowMapper());
-    }
-
-    public void update(Employee employee) {
+    public void update(String email, Employee employee) {
         String query = "UPDATE employee SET name = ?, type = ?, office_address_id = ? WHERE email = ?";
-        jdbcTemplate.update(query, employee.name(), employee.type(), employee.officeAddressId(), employee.email());
+        jdbcTemplate.update(query, employee.name(), employee.type(), employee.officeAddressId(), email);
     }
 
     public void deleteByEmail(String email) {
