@@ -20,20 +20,15 @@ public class ApplicationController {
     }
     @GetMapping("/")
     public String home(@AuthenticationPrincipal @NotNull OAuth2User principal, HttpServletResponse httpServletResponse) {
-        // Check if the user is not authenticated
         if (principal == null) {
-            // Redirect to the login page if not authenticated
             httpServletResponse.setHeader("Location", "/login");
             httpServletResponse.setStatus(302);
             return "Login first";
         }
-        // Extract relevant customer information from OAuth2User
         String email = principal.getAttribute("email");
 
-        // Create a Customer object
         Customer customer = new Customer(email);
 
-        // Save the customer using the CustomerRepository if the email doesn't already exist
         if(!customerRepository.emailExists(email)){
             customerRepository.save(customer);
         }
