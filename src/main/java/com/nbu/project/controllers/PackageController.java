@@ -4,7 +4,6 @@ import com.nbu.project.entities.Package;
 import com.nbu.project.services.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

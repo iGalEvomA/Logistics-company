@@ -19,4 +19,4 @@ public record Package(
         int deliveryAddressId,
         String registerEmail,
         String courierEmail
-) {}
+) { }

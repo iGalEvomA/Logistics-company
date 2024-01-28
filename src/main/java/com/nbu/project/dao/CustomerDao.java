@@ -7,13 +7,17 @@ import java.util.List;
 public interface CustomerDao {
 
     //Create
-    public void save(Customer customer);
+    void save(Customer customer);
+
     //Read
-    public Customer getByEmail(String email);
+    Customer getByEmail(String email);
+
     //Update
-    public void update(Customer customer);
+    void update(Customer customer);
+
     //Delete
-    public void deleteByEmail(String email);
+    void deleteByEmail(String email);
+
     //Get All
-    public List<Customer> getAll();
+    List<Customer> getAll();
 }

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressDaoImpl implements AddressDao{
+public class AddressDaoImpl implements AddressDao {
 
     private DataSource dataSource;
 
@@ -23,19 +23,19 @@ public class AddressDaoImpl implements AddressDao{
         String query = "insert into Address (id, address_type, address) values (?,?,?)";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setInt(1, address.id());
             ps.setString(2, address.address_type());
             ps.setString(3, address.address());
             int out = ps.executeUpdate();
-            if(out !=0){
-                System.out.println("Address saved with id="+address.id());
-            }else System.out.println("Address save failed with id="+address.id());
-        }catch(SQLException e){
+            if (out != 0) {
+                System.out.println("Address saved with id=" + address.id());
+            } else System.out.println("Address save failed with id=" + address.id());
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -67,7 +67,7 @@ public class AddressDaoImpl implements AddressDao{
     }
 
     @Override
-    public void deleteById(int id){
+    public void deleteById(int id) {
         String query = "DELETE FROM Address WHERE id=?";
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -92,11 +92,11 @@ public class AddressDaoImpl implements AddressDao{
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Address emp = new Address(
                         rs.getInt("id"),
                         rs.getString("address_type"),
@@ -104,9 +104,9 @@ public class AddressDaoImpl implements AddressDao{
                 );
                 empList.add(emp);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 rs.close();
                 ps.close();
