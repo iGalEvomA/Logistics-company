@@ -3,5 +3,7 @@ CREATE TABLE IF NOT EXISTS employee (
     name VARCHAR(225) NOT NULL,
     type VARCHAR(45) NOT NULL,
     office_address_id INT NOT NULL,
-    FOREIGN KEY (office_address_id) REFERENCES address (id)
+    token1 VARCHAR(225),
+    token2 VARCHAR(225),
+    FOREIGN KEY(office_address_id) REFERENCES address(id)
 );
