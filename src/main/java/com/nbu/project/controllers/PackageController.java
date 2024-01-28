@@ -19,6 +19,11 @@ public class PackageController {
         this.packageService = packageService;
     }
 
+    @PostMapping
+    public Package createPackage(@RequestBody Package pkg) {
+        return packageService.createPackage(pkg);
+    }
+
     @GetMapping
     public List<Package> getAllPackages() {
         return packageService.getAllPackages();
@@ -27,11 +32,6 @@ public class PackageController {
     @GetMapping("/{id}")
     public Package getPackageById(@PathVariable int id) {
         return packageService.getPackageById(id);
-    }
-
-    @PostMapping
-    public Package createPackage(@RequestBody Package pkg) {
-        return packageService.createPackage(pkg);
     }
 
     @PutMapping("/{id}")

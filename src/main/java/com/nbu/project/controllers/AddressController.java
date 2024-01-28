@@ -28,13 +28,13 @@ public class AddressController {
         return addressService.getAllAddresses();
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id) {
-        addressService.deleteAddressById(id);
-    }
-
     @PutMapping("/{id}")
     public void updateAddress(@PathVariable int id, @RequestBody Address address) {
         addressService.update(id, address);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable int id) {
+        addressService.deleteAddressById(id);
     }
 }

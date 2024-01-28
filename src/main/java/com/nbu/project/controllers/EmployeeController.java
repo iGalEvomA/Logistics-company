@@ -19,6 +19,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @PostMapping
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
+    }
+
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
@@ -32,11 +37,6 @@ public class EmployeeController {
     @PutMapping("/{email}")
     public void updateEmployee(@PathVariable String email, @RequestBody Employee employee) {
         employeeService.updateEmployee(email, employee);
-    }
-
-    @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
     }
 
     @DeleteMapping("/{email}")
