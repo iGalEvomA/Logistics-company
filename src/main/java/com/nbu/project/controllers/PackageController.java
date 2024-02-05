@@ -34,6 +34,26 @@ public class PackageController {
         return packageService.getPackageById(id);
     }
 
+    @GetMapping("/employee")
+    public List<Package> getAllPackagesByEmployee(@RequestParam String employeeEmail) {
+        return packageService.getAllPackagesByEmployee(employeeEmail);
+    }
+
+    @GetMapping("/status")
+    public List<Package> getAllPackagesWithStatus(@RequestParam String status) {
+        return packageService.getAllPackagesWithStatus(status);
+    }
+
+    @GetMapping("/sender")
+    public List<Package> getAllPackagesFromSender(@RequestParam String senderEmail) {
+        return packageService.getAllPackagesFromSender(senderEmail);
+    }
+
+    @GetMapping("/receiver")
+    public List<Package> getAllPackagesWithReceiver(@RequestParam String receiverEmail) {
+        return packageService.getAllPackagesWithReceiver(receiverEmail);
+    }
+
     @PutMapping("/{id}")
     public void updatePackage(@PathVariable int id, @RequestBody Package pack) {
         pack = new Package(id, pack.status(), pack.weight(), pack.price(),

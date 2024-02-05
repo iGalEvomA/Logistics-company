@@ -1,6 +1,4 @@
 databaseChangeLog:
-#  - include:
-#      file: classpath:/db/changelog/changes/000-drop-database.sql
   - include:
       file: classpath:/db/changelog/changes/001-customer-table.sql
   - include:
@@ -9,3 +7,5 @@ databaseChangeLog:
       file: classpath:/db/changelog/changes/003-employee-table.sql
   - include:
       file: classpath:/db/changelog/changes/004-package-table.sql
+  - include:
+      file: classpath:/db/changelog/changes/005-insert-mock-data.sql

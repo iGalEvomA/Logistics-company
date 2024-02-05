@@ -63,4 +63,23 @@ public class PackageRepository {
     }
 
 
+    public List<Package> findAllByEmployee(String employeeEmail) {
+        String sql = "SELECT * FROM package JOIN package.register_email e WHERE e.id = :id";
+        return jdbcTemplate.query(sql, new PackageRowMapper(), employeeEmail);
+    }
+
+    public List<Package> findAllByStatus(String status) {
+        String sql = "SELECT * FROM package WHERE package.status = :status";
+        return jdbcTemplate.query(sql, new PackageRowMapper(), status);
+    }
+
+    public List<Package> findAllBySender(String senderEmail) {
+        String sql = "SELECT * FROM package WHERE package.sender_email = :sender_email";
+        return jdbcTemplate.query(sql, new PackageRowMapper(), senderEmail);
+    }
+
+    public List<Package> findAllByReceiver(String receiverEmail) {
+        String sql = "SELECT * FROM package WHERE package.receiver_email = :receiver_email";
+        return jdbcTemplate.query(sql, new PackageRowMapper(), receiverEmail);
+    }
 }

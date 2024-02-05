@@ -1,6 +1,7 @@
 package com.nbu.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
