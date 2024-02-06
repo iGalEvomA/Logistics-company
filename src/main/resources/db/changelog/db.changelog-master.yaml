@@ -8,4 +8,10 @@ databaseChangeLog:
   - include:
       file: classpath:/db/changelog/changes/004-package-table.sql
   - include:
-      file: classpath:/db/changelog/changes/005-insert-mock-data.sql
+      file: classpath:/db/changelog/changes/005-insert-mock-addresses.sql
+  - include:
+      file: classpath:/db/changelog/changes/006-insert-mock-employees.sql
+  - include:
+      file: classpath:/db/changelog/changes/007-insert-mock-customers.sql
+  - include:
+      file: classpath:/db/changelog/changes/008-insert-mock-packages.sql
