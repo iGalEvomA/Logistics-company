@@ -1,9 +1,8 @@
 package com.nbu.project.rowmapper;
 
 import com.nbu.project.entities.Address;
-import com.nbu.project.entities.Customer;
-
 import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

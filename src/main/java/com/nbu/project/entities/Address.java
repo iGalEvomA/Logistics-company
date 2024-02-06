@@ -4,4 +4,4 @@ public record Address(
         int id,
         String address_type,
         String address
-){}
+) { }

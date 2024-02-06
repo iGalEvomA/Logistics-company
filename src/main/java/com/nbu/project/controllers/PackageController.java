@@ -4,7 +4,6 @@ import com.nbu.project.entities.Package;
 import com.nbu.project.services.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -20,6 +19,11 @@ public class PackageController {
         this.packageService = packageService;
     }
 
+    @PostMapping
+    public Package createPackage(@RequestBody Package pkg) {
+        return packageService.createPackage(pkg);
+    }
+
     @GetMapping
     public List<Package> getAllPackages() {
         return packageService.getAllPackages();
@@ -30,9 +34,24 @@ public class PackageController {
         return packageService.getPackageById(id);
     }
 
-    @PostMapping
-    public Package createPackage(@RequestBody Package pkg) {
-        return packageService.createPackage(pkg);
+    @GetMapping("/employee")
+    public List<Package> getAllPackagesByEmployee(@RequestParam String employeeEmail) {
+        return packageService.getAllPackagesByEmployee(employeeEmail);
+    }
+
+    @GetMapping("/status")
+    public List<Package> getAllPackagesWithStatus(@RequestParam String status) {
+        return packageService.getAllPackagesWithStatus(status);
+    }
+
+    @GetMapping("/sender")
+    public List<Package> getAllPackagesFromSender(@RequestParam String senderEmail) {
+        return packageService.getAllPackagesFromSender(senderEmail);
+    }
+
+    @GetMapping("/receiver")
+    public List<Package> getAllPackagesWithReceiver(@RequestParam String receiverEmail) {
+        return packageService.getAllPackagesWithReceiver(receiverEmail);
     }
 
     @PutMapping("/{id}")

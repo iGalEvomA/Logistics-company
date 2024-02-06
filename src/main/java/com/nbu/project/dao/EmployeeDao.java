@@ -8,8 +8,9 @@ import java.util.Optional;
 public interface EmployeeDao {
     Employee save(Employee employee);
 
-    public Optional<Employee> getByEmail(String email);
-    public List<Employee> getAllEmployees();
+    Optional<Employee> getByEmail(String email);
+
+    List<Employee> getAllEmployees();
 
     void update(Employee employee);
 

@@ -1,17 +1,15 @@
 package com.nbu.project.dao;
 
 import com.nbu.project.entities.Customer;
-import com.nbu.project.entities.Employee;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import javax.sql.DataSource;
 public class CustomerDaoImpl implements CustomerDao {
 
     private DataSource dataSource;
@@ -25,17 +23,17 @@ public class CustomerDaoImpl implements CustomerDao {
         String query = "insert into Customer (email) values (?)";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, customer.email());
             int out = ps.executeUpdate();
-            if(out !=0){
-                System.out.println("Customer saved with email="+customer.email());
-            }else System.out.println("Customer save failed with email="+customer.email());
-        }catch(SQLException e){
+            if (out != 0) {
+                System.out.println("Customer saved with email=" + customer.email());
+            } else System.out.println("Customer save failed with email=" + customer.email());
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -75,17 +73,17 @@ public class CustomerDaoImpl implements CustomerDao {
         String query = "update Customer where email=?";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, customer.email());
             int out = ps.executeUpdate();
-            if(out !=0){
-                System.out.println("Customer updated with username="+customer.email());
-            }else System.out.println("No Customer found with username="+customer.email());
-        }catch(SQLException e){
+            if (out != 0) {
+                System.out.println("Customer updated with username=" + customer.email());
+            } else System.out.println("No Customer found with username=" + customer.email());
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -100,17 +98,17 @@ public class CustomerDaoImpl implements CustomerDao {
         String query = "delete from Customer where email=?";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, email);
             int out = ps.executeUpdate();
-            if(out !=0){
-                System.out.println("Customer deleted with email="+email);
-            }else System.out.println("No Customer found with email="+email);
-        }catch(SQLException e){
+            if (out != 0) {
+                System.out.println("Customer deleted with email=" + email);
+            } else System.out.println("No Customer found with email=" + email);
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -127,17 +125,17 @@ public class CustomerDaoImpl implements CustomerDao {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Customer emp = new Customer(rs.getString("email"));
                 empList.add(emp);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 rs.close();
                 ps.close();

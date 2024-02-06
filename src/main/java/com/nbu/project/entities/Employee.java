@@ -6,4 +6,4 @@ public record Employee (
     String name,
     String type,
     int officeAddressId
-){}
+) { }

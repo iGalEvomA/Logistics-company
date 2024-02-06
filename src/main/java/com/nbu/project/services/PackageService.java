@@ -36,4 +36,20 @@ public class PackageService {
     public void deletePackageById(int id) {
         packageRepository.deleteById(id);
     }
+
+    public List<Package> getAllPackagesByEmployee(String employeeEmail) {
+        return packageRepository.findAllByEmployee(employeeEmail);
+    }
+
+    public List<Package> getAllPackagesWithStatus(String status) {
+        return packageRepository.findAllByStatus(status);
+    }
+
+    public List<Package> getAllPackagesFromSender(String senderEmail) {
+        return packageRepository.findAllBySender(senderEmail);
+    }
+
+    public List<Package> getAllPackagesWithReceiver(String receiverEmail) {
+        return packageRepository.findAllByReceiver(receiverEmail);
+    }
 }

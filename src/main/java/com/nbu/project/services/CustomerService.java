@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CustomerService {
     @Autowired
@@ -18,10 +19,12 @@ public class CustomerService {
     public Customer createCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
-    public void update(Customer customer){
+
+    public void update(Customer customer) {
         customerRepository.update(customer);
     }
-    public void deleteByEmail(String email){
+
+    public void deleteByEmail(String email) {
         customerRepository.deleteByEmail(email);
     }
 }

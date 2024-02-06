@@ -1,7 +1,7 @@
 package com.nbu.project.services;
-import com.nbu.project.dao.EmployeeDao;
+
 import com.nbu.project.entities.Employee;
-import com.nbu.project.repos.CustomerRepository;
+import com.nbu.project.entities.Package;
 import com.nbu.project.repos.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ public class EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.getByEmail(email);
         return optionalEmployee.orElse(null);
     }
+
     public void updateEmployee(String email, Employee employee) {
         employeeRepository.update(email, employee);
     }

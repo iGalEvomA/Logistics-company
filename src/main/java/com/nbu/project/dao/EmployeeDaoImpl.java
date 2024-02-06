@@ -1,9 +1,9 @@
 package com.nbu.project.dao;
 
-import com.nbu.project.entities.Customer;
 import com.nbu.project.entities.Employee;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.sql.DataSource;
+
 @Repository
 
 public class EmployeeDaoImpl implements EmployeeDao {
@@ -82,11 +82,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Employee emp = new Employee(
                         rs.getString("email"),
                         rs.getString("name"),
@@ -94,9 +94,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
                         rs.getInt("office_address_id"));
                 empList.add(emp);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 rs.close();
                 ps.close();
