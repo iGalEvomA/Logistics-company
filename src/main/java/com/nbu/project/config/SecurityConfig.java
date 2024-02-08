@@ -13,15 +13,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/", "/login**").permitAll()
-                                .anyRequest().authenticated()
-                )
-                .oauth2Login(withDefaults())
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"))
-                .csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
-
+        http.csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
         return http.build();
     }
 }

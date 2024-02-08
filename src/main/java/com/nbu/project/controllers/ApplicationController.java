@@ -19,20 +19,13 @@ public class ApplicationController {
         this.customerRepository = customerRepository;
     }
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal @NotNull OAuth2User principal, HttpServletResponse httpServletResponse) {
-        if (principal == null) {
-            httpServletResponse.setHeader("Location", "/login");
-            httpServletResponse.setStatus(302);
-            return "Login first";
-        }
-        String email = principal.getAttribute("email");
-
+    public String home(HttpServletResponse httpServletResponse) {
+        final String email = "test";
         Customer customer = new Customer(email);
 
         if(!customerRepository.emailExists(email)){
             customerRepository.save(customer);
         }
-
-        return "Hello " + principal.getAttribute("name") + "! Customer saved.";
+        return "Welcome to the home page!";
     }
 }
