@@ -3,6 +3,7 @@ package com.nbu.project.controllers;
 import com.nbu.project.dto.LoginRequest;
 import com.nbu.project.services.TokenService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        Claims claims = Jwts.claims().subject(loginRequest.getEmail())
-                .issuedAt(Date.from(Instant.now())).build();
+        Claims claims = Jwts.claims().setSubject(loginRequest.getEmail()).setIssuedAt(Date.from(Instant.now()));
         String jwt = tokenService.generateJWT(claims);
         return ResponseEntity.ok(jwt);
     }
