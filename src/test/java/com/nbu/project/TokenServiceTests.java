@@ -1,8 +1,6 @@
 package com.nbu.project;
 
 import com.nbu.project.services.TokenService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +11,10 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.Instant;
-import java.util.Base64;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TokenServiceTests {
 
@@ -48,6 +46,7 @@ public class TokenServiceTests {
                 .compact();
 
         var parsed = tokenService.parseJWT(token);
-        assertEquals("test", parsed.getBody().getSubject());
+        assertFalse(parsed.isEmpty());
+        assertEquals("test", parsed.get().getBody().getSubject());
     }
 }
