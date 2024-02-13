@@ -41,6 +41,10 @@ public class EmployeeRepository {
         }
     }
 
+    public boolean emailExists(String email) {
+        return getByEmail(email).isPresent();
+    }
+
     public void update(String email, Employee employee) {
         String query = "UPDATE employee SET name = ?, type = ?, office_address_id = ? WHERE email = ?";
         jdbcTemplate.update(query, employee.name(), employee.type(), employee.officeAddressId(), email);
